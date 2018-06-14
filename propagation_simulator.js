@@ -139,13 +139,13 @@ class NetworkSimulator{
     propagate(nodes, block) {
         let new_received_nodes = [];
 
+        block.propagation_count++;
+
         _.forEach(nodes, (node) => {
             new_received_nodes = _.concat(new_received_nodes, _.filter(node.outBoundPeers, (peer) => {
                 return peer.receive(block);
             }))
         });
-
-        block.propagation_count++;
 
         return new_received_nodes;
     }
@@ -161,7 +161,9 @@ function main() {
     network_simulator.simulate_block_propagation();
 }
 
-main();
+if (typeof require != 'undefined' && require.main == module) {
+    main();
+}
 
 
 module.exports.Node = Node;

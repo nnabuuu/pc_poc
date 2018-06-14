@@ -4,7 +4,6 @@ const _ = require('lodash');
 const NodeGenerator = require('./propagation_simulator').NodeGenerator;
 const NetworkGenerator = require('./propagation_simulator').NetworkGenerator;
 const Block = require('./propagation_simulator').Block;
-const Node = require('./propagation_simulator').Node;
 
 const assert = require('assert');
 
@@ -215,4 +214,6 @@ function main() {
     network_simulator.simulate_block_propagation();
 }
 
-main();
+if (typeof require != 'undefined' && require.main == module) {
+    main();
+}
