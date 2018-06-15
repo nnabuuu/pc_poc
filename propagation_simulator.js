@@ -79,7 +79,7 @@ class NodeGenerator {
 class NetworkGenerator{
 
     new_network(maxNetworkNodeCount){
-        let node_generator  = new NodeGenerator(maxNetworkNodeCount, 2, 2, 4, 8);
+        let node_generator  = new NodeGenerator(maxNetworkNodeCount, 2, 2, 2, 8);
         let network = [];
         for(let i = 0; i < maxNetworkNodeCount; i++) {
             let node = node_generator.new_node(i);

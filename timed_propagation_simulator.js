@@ -2,12 +2,18 @@
 
 const _ = require('lodash');
 const NodeGenerator = require('./propagation_simulator').NodeGenerator;
-const NetworkGenerator = require('./propagation_simulator').NetworkGenerator;
 const Block = require('./propagation_simulator').Block;
 
 const assert = require('assert');
 
 const BLOCK_SIZE = 32000;
+
+const MIN_INBOUND = 2;
+const MAX_INBOUND = 2;
+const MIN_OUTBOUND = 2;
+const MAX_OUTBOUND = 8;
+const MIN_BANDWIDTH = 200;
+const MAX_BANDWIDTH = 800;
 
 class TimedNode {
     constructor(index, bandwidth){
@@ -107,7 +113,15 @@ class TimedNodeGenerator extends NodeGenerator {
 class TimedNetworkGenerator{
 
     new_network(maxNetworkNodeCount){
-        let node_generator  = new TimedNodeGenerator(maxNetworkNodeCount, 2, 2, 4, 8, 200, 800);
+        let node_generator  = new TimedNodeGenerator(
+            maxNetworkNodeCount,
+            MIN_INBOUND,
+            MAX_INBOUND,
+            MIN_OUTBOUND,
+            MAX_OUTBOUND,
+            MIN_BANDWIDTH,
+            MAX_BANDWIDTH);
+
         let network = [];
         for(let i = 0; i < maxNetworkNodeCount; i++) {
             let node = node_generator.new_timed_node(i);

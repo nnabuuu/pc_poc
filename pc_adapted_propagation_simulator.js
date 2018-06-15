@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const Node = require('./propagation_simulator').Node;
+const Block = require('./propagation_simulator').Block;
 
 const PC_ADAPT_RATE = 0.2;
 
@@ -30,25 +31,16 @@ class PCAdaptedNode extends Node{
 
 }
 
-//Block
-class Block {
-    constructor(height, size = 1000){
-        this.propagation_count = 0;
-        this.height = height;
-        this.size = size;
-    }
-}
-
 //Generate node
 class PCNodeGenerator {
 
-    constructor(maxNetworkNodeCount, minInbound, maxInbound, minOutbound, maxOutbound, pc_adapted_chance){
+    constructor(maxNetworkNodeCount, minInbound, maxInbound, minOutbound, maxOutbound, pc_adapted_rate){
         this.maxNetworkNodeCount = maxNetworkNodeCount;
         this.minInbound = minInbound;
         this.maxInbound = maxInbound;
         this.minOutbound = minOutbound;
         this.maxOutbound = maxOutbound;
-        this.pc_adapted_chance = pc_adapted_chance;
+        this.pc_adapted_chance = pc_adapted_rate;
     }
 
     new_node(index){
@@ -96,7 +88,7 @@ class PCNodeGenerator {
 class PCNetworkGenerator{
 
     new_network(maxNetworkNodeCount){
-        let node_generator  = new PCNodeGenerator(maxNetworkNodeCount, 2, 2, 4, 8, PC_ADAPT_RATE);
+        let node_generator  = new PCNodeGenerator(maxNetworkNodeCount, 2, 2, 2, 8, PC_ADAPT_RATE);
 
         let network = [];
 
